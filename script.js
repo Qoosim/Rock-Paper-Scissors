@@ -1,4 +1,4 @@
-const prompt = require('prompt-sync')({sigint: true});
+//const prompt = require('prompt-sync')({sigint: true});
 
 const guess = ['rock', 'paper', 'scissors'];
 
@@ -31,7 +31,24 @@ function playRound(playerSelection, computerSelection) {
 //const computerSelection = computerPlay();
 //console.log(computerSelection);
 
-function game(times) {
+function game() {
+    const btnRock = document.createElement('button');
+    btnRock.setAttribute('class', 'rockBtn');
+    btnRock.textContent = 'Rock';
+    const btnPaper = document.createElement('button');
+    btnPaper.setAttribute('class', 'paperBtn');
+    btnPaper.textContent = 'Paper';
+    const btnScissors = document.createElement('button')
+    btnScissors.setAttribute('class', 'scissorsBtn');
+    btnScissors.textContent = 'Scissors';
+    
+    document.body.appendChild(btnRock);
+
+}
+
+game();
+
+    /*
     let playerScores = 0;
     let computerScores = 0;
 
@@ -46,6 +63,7 @@ function game(times) {
             computerScores += 1;
         }
     }
+
     if (playerScores > computerScores) {
         console.log('Player won!.');
     } else if(playerScores < computerScores) {
@@ -53,7 +71,7 @@ function game(times) {
     } else {
         console.log('Game ended in tie!. Try again.');
     }
-}
+    */
 
-game(5);
+
 
