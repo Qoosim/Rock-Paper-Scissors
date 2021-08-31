@@ -1,10 +1,13 @@
 //const prompt = require('prompt-sync')({sigint: true});
+// Variables declarations;
+
 let playerScore = 0;
 let computerScore = 0;
 let roundWinner = '';
 
 const guess = ['rock', 'paper', 'scissors'];
 
+// Logic
 function computerPlay() {
     return guess[Math.floor(Math.random() * guess.length)];
 }
@@ -31,6 +34,8 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
+// UI SECTION //
+
 const body = document.querySelector('body');
 const headerDiv = document.createElement('div');
 headerDiv.style.cssText = 'padding: 40px; background: #393e46; border-bottom: 2px solid #ffa500;';
@@ -43,20 +48,20 @@ body.appendChild(headerDiv);
 
 const infoDiv = document.createElement('div');
 infoDiv.style.cssText = 'padding: 30px;'
-const scorePara = document.createElement('h1');
-scorePara.textContent = 'Score'
-scorePara.style.cssText = 'font-size: 40px; text-align: center; color: #fff; margin-bottom: 20px;';
+const scoreInfo = document.createElement('h1');
+scoreInfo.textContent = 'Score'
+scoreInfo.style.cssText = 'font-size: 40px; text-align: center; color: #fff; margin-bottom: 20px;';
 const playerComputerDiv = document.createElement('div');
 playerComputerDiv.style.cssText = 'width: 40%; margin: 0 auto; display: flex; justify-content: space-evenly;';
-const playerPara = document.createElement('p');
-playerPara.textContent = `Player: ${playerScore}`;
-playerPara.style.cssText = 'font-size: 25px; color: #fff;';
-const computerPara = document.createElement('p');
-computerPara.textContent = `Computer: ${computerScore}`;
-computerPara.style.cssText = 'font-size: 25px; color: #fff;';
-playerComputerDiv.appendChild(playerPara);
-playerComputerDiv.appendChild(computerPara);
-infoDiv.appendChild(scorePara);
+const playerScorePara = document.createElement('p');
+playerScorePara.textContent = `Player: ${playerScore}`;
+playerScorePara.style.cssText = 'font-size: 25px; color: #fff;';
+const computerScorePara = document.createElement('p');
+computerScorePara.textContent = `Computer: ${computerScore}`;
+computerScorePara.style.cssText = 'font-size: 25px; color: #fff;';
+playerComputerDiv.appendChild(playerScorePara);
+playerComputerDiv.appendChild(computerScorePara);
+infoDiv.appendChild(scoreInfo);
 infoDiv.appendChild(playerComputerDiv);
 body.appendChild(infoDiv);
 
@@ -86,58 +91,54 @@ body.appendChild(containerDiv);
 
 const winnerMessageDiv = document.createElement('div');
 winnerMessageDiv.style.cssText = 'width: 100%;';
-const para = document.createElement('p');
-para.textContent = 'Winner Message!';
-para.style.cssText = 'text-align: center; color: #fff; margin-top: 100px;';
-winnerMessageDiv.appendChild(para);
+const msgPara = document.createElement('p');
+msgPara.textContent = 'Winner Message!';
+msgPara.style.cssText = 'text-align: center; color: #fff; margin-top: 100px;';
+winnerMessageDiv.appendChild(msgPara);
 body.appendChild(winnerMessageDiv);
 
-const computerSelection = computerPlay();
+btnRock.addEventListener('click', function() {
+    game('rock');
+});
+btnPaper.addEventListener('click', function() {
+    game('paper');
+});
+btnScissors.addEventListener('click', function() {
+    game('scissors');
+});
 
-function game() {
-    btnRock.addEventListener('click', function() {
-        const playerSelection = btnRock.innerText.toLowerCase();
-        console.log(playRound(playerSelection, computerSelection));
-    });
+function scoreUpdate() {
+    if(roundWinner === 'tie') {
+       scoreInfo.textContent = 'It\'s a tie!'; 
+    } else if (roundWinner === 'player') {
+        scoreInfo.textContent = 'You won!';
+    } else if (roundWinner === 'computer') {
+        scoreInfo.textContent = 'You lost!';
+    }
 
-    btnPaper.addEventListener('click', function() {
-        const playerSelection = btnPaper.innerText.toLowerCase();
-        console.log(playRound(playerSelection, computerSelection));
-    })
-
-    btnScissors.addEventListener('click', function() {
-        const playerSelection = btnScissors.innerText.toLowerCase();
-        console.log(playRound(playerSelection, computerSelection));
-    })
+    playerScorePara.textContent = `Player: ${playerScore}`;
+    computerScorePara.textContent = `Computer: ${computerScore}`;
 }
 
-game();
+function isGameOver() {
+    return playerScore === 5 || computerScore === 5;
+}
 
+function setWinnerMessage() {
+    return playerScore > computerScore
+        ? (msgPara.textContent = 'You won!')
+        : (msgPara.textContent = 'You lost!');
+}
 
-    /*
-    let playerScores = 0;
-    let computerScores = 0;
+function game(playerSelection) {
+    const computerSelection = computerPlay();
+    playRound(playerSelection, computerSelection);
+    scoreUpdate();
 
-    for(let i = 1; i <= times; i++) {
-        const playerSelection = prompt('Make your selection: ');
-        const computerSelection = computerPlay();
-        console.log(playRound(playerSelection, computerSelection));
-        let result = playRound(playerSelection, computerSelection).toLowerCase();
-        if (result.includes('you won')) {
-            playerScores += 1;
-        } else if (result.includes('computer won')) {
-            computerScores += 1;
-        }
+    if (isGameOver()) {
+        setWinnerMessage();
+        return;
     }
-
-    if (playerScores > computerScores) {
-        console.log('Player won!.');
-    } else if(playerScores < computerScores) {
-        console.log('Computer won!.');
-    } else {
-        console.log('Game ended in tie!. Try again.');
-    }
-    */
-
+}
 
 
