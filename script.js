@@ -89,13 +89,37 @@ containerDiv.appendChild(btnPaper);
 containerDiv.appendChild(btnScissors);
 body.appendChild(containerDiv);
 
-const winnerMessageDiv = document.createElement('div');
-winnerMessageDiv.style.cssText = 'width: 100%;';
-const msgPara = document.createElement('p');
-msgPara.textContent = 'Winner Message!';
-msgPara.style.cssText = 'text-align: center; color: #fff; margin-top: 100px;';
-winnerMessageDiv.appendChild(msgPara);
-body.appendChild(winnerMessageDiv);
+// Modal
+//const modalContainer = document.createElement('div');
+//modalContainer.setAttribute('class', 'modal');
+const endgameModal = document.createElement('div');
+endgameModal.setAttribute('class', 'modal')
+
+const winnerMsg = document.createElement('p');
+winnerMsg.setAttribute('class', 'message makeBold');
+winnerMsg.setAttribute('id', 'endgameMsg');
+
+const tryAgainMsg = document.createElement('p');
+tryAgainMsg.setAttribute('class', 'message');
+tryAgainMsg.textContent = 'Would you like to try again?';
+
+const restartBtn = document.createElement('button');
+restartBtn.setAttribute('class', 'btn-restart');
+restartBtn.setAttribute('id', 'restartBtn');
+restartBtn.textContent = 'Restart';
+restartBtn.style.cssText = 'padding: 10px; border: none; border-radius: 10px;  font-size: 25px;'
+restartBtn.addEventListener('click', restartGame);
+
+// Create and select overlay
+const overlay = document.createElement('div');
+overlay.setAttribute('class', 'overlay');
+overlay.addEventListener('click', closeEndgameModal);
+
+endgameModal.appendChild(winnerMsg);
+endgameModal.appendChild(tryAgainMsg);
+endgameModal.appendChild(restartBtn);
+body.appendChild(endgameModal);
+body.appendChild(overlay);
 
 btnRock.addEventListener('click', function() {
     game('rock');
@@ -120,24 +144,48 @@ function scoreUpdate() {
     computerScorePara.textContent = `Computer: ${computerScore}`;
 }
 
-function isGameOver() {
+function gameOver() {
     return playerScore === 5 || computerScore === 5;
 }
 
 function setWinnerMessage() {
     return playerScore > computerScore
-        ? (msgPara.textContent = 'You won!')
-        : (msgPara.textContent = 'You lost!');
+        ? (winnerMsg.textContent = 'You won!')
+        : (winnerMsg.textContent = 'You lost!');
+}
+
+function openEndgameModal() {
+    endgameModal.classList.add('active');
+    overlay.classList.add('active');
+}
+
+function closeEndgameModal() {
+    endgameModal.classList.remove('active');
+    overlay.classList.remove('active')
+}
+
+function restartGame() {
+    playerScore = 0;
+    computerScore = 0;
+    scoreInfo.textContent = 'Score'
+    playerScorePara.textContent = 'Player: 0';
+    computerScorePara.textContent = 'Computer: 0';
+    endgameModal.classList.remove('active');
+    overlay.classList.remove('active');
 }
 
 function game(playerSelection) {
+    if (gameOver()) {
+        openEndgameModal();
+        return;
+    }
     const computerSelection = computerPlay();
     playRound(playerSelection, computerSelection);
     scoreUpdate();
 
-    if (isGameOver()) {
+    if (gameOver()) {
+        openEndgameModal();
         setWinnerMessage();
-        return;
     }
 }
 
