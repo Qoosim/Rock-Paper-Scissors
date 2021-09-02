@@ -38,29 +38,32 @@ function playRound(playerSelection, computerSelection) {
 
 const body = document.querySelector('body');
 const headerDiv = document.createElement('div');
-headerDiv.style.cssText = 'padding: 40px; background: #393e46; border-bottom: 2px solid #ffa500;';
+headerDiv.setAttribute('class', 'header');
 
 const headerMessage = document.createElement('h1');
 headerMessage.setAttribute('class', 'title');
 
 headerMessage.textContent = 'Welcome to Rock Paper Scissors Fun Game!';
-headerMessage.style.cssText = 'font-size: 40px; color: #ffa500; text-align: center;'
 headerDiv.appendChild(headerMessage);
 body.appendChild(headerDiv);
 
 const infoDiv = document.createElement('div');
-infoDiv.style.cssText = 'padding: 30px;'
-const scoreInfo = document.createElement('h1');
+infoDiv.setAttribute('class', 'info-div');
+
+const scoreInfo = document.createElement('h2');
+scoreInfo.setAttribute('class', 'score-info');
 scoreInfo.textContent = 'Score'
-scoreInfo.style.cssText = 'font-size: 40px; text-align: center; color: #fff; margin-bottom: 20px;';
+
 const playerComputerDiv = document.createElement('div');
-playerComputerDiv.style.cssText = 'width: 40%; margin: 0 auto; display: flex; justify-content: space-evenly;';
+playerComputerDiv.setAttribute('class', 'cp-div')
+
 const playerScorePara = document.createElement('p');
 playerScorePara.textContent = `Player: ${playerScore}`;
-playerScorePara.style.cssText = 'font-size: 25px; color: #fff;';
+playerScorePara.setAttribute('class', 'player');
+
 const computerScorePara = document.createElement('p');
+computerScorePara.setAttribute('class', 'computer');
 computerScorePara.textContent = `Computer: ${computerScore}`;
-computerScorePara.style.cssText = 'font-size: 25px; color: #fff;';
 playerComputerDiv.appendChild(playerScorePara);
 playerComputerDiv.appendChild(computerScorePara);
 infoDiv.appendChild(scoreInfo);
@@ -70,21 +73,17 @@ body.appendChild(infoDiv);
 const btnRock = document.createElement('button');
 btnRock.setAttribute('class', 'rockBtn');
 btnRock.textContent = 'Rock';
-btnRock.style.cssText = 'font-size: 20px; padding: 20px 30px; cursor: pointer;';
 
 const btnPaper = document.createElement('button');
 btnPaper.setAttribute('class', 'paperBtn');
 btnPaper.textContent = 'Paper';
-btnPaper.style.cssText = 'font-size: 20px; padding: 20px 30px; cursor: pointer;';
 
 const btnScissors = document.createElement('button')
 btnScissors.setAttribute('class', 'scissorsBtn');
 btnScissors.textContent = 'Scissors';
-btnScissors.style.cssText = 'font-size: 20px; padding: 20px 30px; cursor: pointer;';
 
 const containerDiv = document.createElement('div');
 containerDiv.setAttribute('class', 'main');
-containerDiv.style.cssText = 'width: 50%; display: flex; justify-content: space-evenly; margin: 20px auto 0 auto;';
 
 containerDiv.appendChild(btnRock);
 containerDiv.appendChild(btnPaper);
@@ -92,8 +91,6 @@ containerDiv.appendChild(btnScissors);
 body.appendChild(containerDiv);
 
 // Modal
-//const modalContainer = document.createElement('div');
-//modalContainer.setAttribute('class', 'modal');
 const endgameModal = document.createElement('div');
 endgameModal.setAttribute('class', 'modal')
 
@@ -107,9 +104,7 @@ tryAgainMsg.textContent = 'Would you like to try again?';
 
 const restartBtn = document.createElement('button');
 restartBtn.setAttribute('class', 'btn-restart');
-restartBtn.setAttribute('id', 'restartBtn');
 restartBtn.textContent = 'Restart';
-restartBtn.style.cssText = 'padding: 10px; border: none; border-radius: 10px;  font-size: 25px;'
 restartBtn.addEventListener('click', restartGame);
 
 // Create and select overlay
