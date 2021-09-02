@@ -112,6 +112,8 @@ body {
 .scissorsBtn {
     font-size: 20px;
     padding: 20px 30px;
+    border-radius: 10px;
+    border: none;
     cursor: pointer;
 }
 
