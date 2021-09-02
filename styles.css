@@ -12,6 +12,16 @@ body {
     background: #222831;
 }
 
+.header {
+    padding: 40px;
+    background: #393e46;
+    border-bottom: 2px solid #ffa500;
+}
+
+.info-div {
+    padding: 30px;
+}
+
 .modal {
     position: fixed;
     z-index: 1;
@@ -46,7 +56,11 @@ body {
 }
 
 .btn-restart {
-    margin-top: 10px;
+    font-size: 25px;
+    margin-top: 7px;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
     cursor: pointer;
 }
 
@@ -61,12 +75,88 @@ body {
     opacity: 0.6;
 }
 
+.title {
+    font-size: 40px;
+    color: #ffa500;
+    text-align: center;
+}
+
+.score-info {
+    font-size: 40px;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.player, .computer {
+    font-size: 25px;
+    color: #fff;
+}
+
+.cp-div {
+    margin: 0 auto;
+    width: 20%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.main {
+    width: 50%;
+    display: flex;
+    justify-content: space-evenly;
+    margin: 20px auto 0 auto;
+}
+
+.rockBtn, 
+.paperBtn, 
+.scissorsBtn {
+    font-size: 20px;
+    padding: 20px 30px;
+    cursor: pointer;
+}
+
 .overlay.active {
     display: block;
 }
 
-@media (max-width: 550px) {
+@media only screen and (max-width: 480px) {
     .title {
         font-size: 20px;
     }
+
+    .score-info {
+        font-size: 20px;
+    }
+
+    .cp-div {
+        width: 60%;
+    }
+
+    .player, .computer {
+        font-size: 15px;
+    }
+
+    .main {
+        width: 100%;
+        margin: 10px auto 0 auto;
+    }
+
+    .rockBtn, 
+    .paperBtn, 
+    .scissorsBtn {
+        font-size: 15px;
+        padding: 15px 20px;
+    }
+
+    .modal {
+        width: 200px;
+        padding: 20px;
+        font-size: 20px;
+    }
+
+    .btn-restart {
+        font-size: 16px;
+        padding: 9px;
+    }
+
 }
