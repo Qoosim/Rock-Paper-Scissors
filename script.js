@@ -41,6 +41,8 @@ const headerDiv = document.createElement('div');
 headerDiv.style.cssText = 'padding: 40px; background: #393e46; border-bottom: 2px solid #ffa500;';
 
 const headerMessage = document.createElement('h1');
+headerMessage.setAttribute('class', 'title');
+
 headerMessage.textContent = 'Welcome to Rock Paper Scissors Fun Game!';
 headerMessage.style.cssText = 'font-size: 40px; color: #ffa500; text-align: center;'
 headerDiv.appendChild(headerMessage);
@@ -188,5 +190,4 @@ function game(playerSelection) {
         setWinnerMessage();
     }
 }
-
 
